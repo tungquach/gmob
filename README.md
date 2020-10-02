@@ -1,5 +1,9 @@
 # Gmob
 
+[![GoDoc](https://godoc.org/github.com/tungquach/gmob?status.svg)](https://pkg.go.dev/github.com/tungquach/gmob)
+![Test](https://github.com/tungquach/gmob/workflows/test/badge.svg)
+[![Go Report Card](https://goreportcard.com/badge/github.com/tungquach/gmob)](https://goreportcard.com/report/github.com/tungquach/gmob)
+
 Gmob is simple util for [MongoDB Go Driver](https://github.com/mongodb/mongo-go-driver) to quickly build an unordered representation of a BSON document (M) from Map or Struct.
 
 ## Install
