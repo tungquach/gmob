@@ -43,13 +43,13 @@ func main() {
     collection := client.Database("test").Collection("cars")
 
     // find record
-    filter := gmob.Build(Car{Name: "BMW"})
+    filter, _ := gmob.Build(Car{Name: "BMW"})
     result := &Car{}
     err = collection.FindOne(ctx, filter).Decode(result)
     log.Printf("result %+v, err: %v", result, err)
 
     // update record
-    setValues := gmob.Build(Car{Name: "BMW 2020"})
+    setValues, _ := gmob.Build(Car{Name: "BMW 2020"})
     err := collection.FindOneAndUpdate(ctx, bson.M{"_id": "car001"},
         bson.M{"$set": setValues}).Err()
     log.Printf("err: %v", err)
