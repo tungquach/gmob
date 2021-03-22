@@ -7,6 +7,7 @@ import (
 	"time"
 
 	"go.mongodb.org/mongo-driver/bson"
+	"go.mongodb.org/mongo-driver/bson/primitive"
 )
 
 // struct tag
@@ -44,6 +45,12 @@ func buildResult(depth int, result bson.M, key string, in interface{}) {
 		reflect.Uint, reflect.Uint8, reflect.Uint16, reflect.Uint32, reflect.Uint64, reflect.Float32, reflect.Float64:
 		result[key] = v.Interface()
 	case reflect.Slice, reflect.Array:
+		// keep original primitive object id type
+		if t, ok := v.Interface().(primitive.ObjectID); ok {
+			result[key] = t
+			return
+		}
+
 		vResult := bson.A{}
 		for i := 0; i < v.Len(); i++ {
 			tempResult := bson.M{}
@@ -65,6 +72,7 @@ func buildResult(depth int, result bson.M, key string, in interface{}) {
 			result[key] = vResult
 		}
 	case reflect.Struct:
+		// keep original time type
 		if t, ok := v.Interface().(time.Time); ok {
 			result[key] = t
 			return
